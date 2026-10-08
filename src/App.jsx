@@ -98,6 +98,8 @@ html,body,#root{width:100%;height:100%;background:#000;overflow:hidden;}
 .rsvp-textarea{width:100%;padding:10px 12px;border:1px solid #c9bfa8;background:transparent;outline:none;resize:none;font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(17px,3.2vw,20px);color:#2a3521;line-height:1.6;min-height:72px;transition:border-color 0.3s;}
 .rsvp-textarea:focus{border-color:#b8a06a;}
 .rsvp-choices{display:flex;gap:10px;margin-bottom:18px;}
+.rsvp-choices-stack{flex-direction:column;}
+.rsvp-choices-stack .rsvp-choice{padding:14px 10px;}
 .rsvp-choice{flex:1;padding:12px 8px;text-align:center;cursor:pointer;border:1px solid #c9bfa8;background:transparent;font-family:'Cinzel',serif;font-size:clamp(10px,2vw,13px);letter-spacing:2px;text-transform:uppercase;color:#2a3521;transition:all 0.25s;min-height:44px;display:flex;align-items:center;justify-content:center;gap:6px;}
 .rsvp-choice:hover{border-color:#b8a06a;background:#f5efd8;}
 .rsvp-choice.sel-yes{background:#2a3521;color:#e8dfc8;border-color:#2a3521;}
@@ -116,11 +118,17 @@ html,body,#root{width:100%;height:100%;background:#000;overflow:hidden;}
 .success-text{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,4.5vw,32px);color:#2a3521;font-weight:300;letter-spacing:2px;margin-bottom:6px;}
 .success-sub{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(16px,3vw,18px);color:#b8a06a;letter-spacing:2px;}
 .location-card{width:100%;max-width:480px;background:#f2ece0;position:relative;box-shadow:0 2px 0 #c9bfa8,0 14px 45px rgba(0,0,0,0.3);overflow:hidden;}
-.album-card{width:100%;max-width:480px;background:#f2ece0;position:relative;box-shadow:0 2px 0 #c9bfa8,0 14px 45px rgba(0,0,0,0.3);overflow:hidden;text-align:center;padding:30px 24px 28px;}
-.album-title{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,5.5vw,29px);font-weight:400;color:#2a3521;letter-spacing:2px;margin:6px 0 10px;}
-.album-sub{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(14px,3.3vw,16px);color:#5c5340;line-height:1.6;max-width:320px;margin:0 auto 20px;}
-.album-btn{display:inline-flex;align-items:center;gap:10px;background:#2a3521;color:#e8dfc8;font-family:'Cinzel',serif;font-size:clamp(11px,2.6vw,13px);letter-spacing:2px;text-transform:uppercase;text-decoration:none;padding:13px 26px;border:1px solid #b8a06a;transition:all 0.25s;}
+.album-card{width:100%;max-width:480px;background:#f2ece0;position:relative;box-shadow:0 2px 0 #c9bfa8,0 14px 45px rgba(0,0,0,0.3);overflow:hidden;text-align:center;padding:34px 26px 28px;}
+.album-icon-circle{width:64px;height:64px;border-radius:50%;background:#e8e0ce;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:26px;}
+.album-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(21px,5vw,27px);font-weight:400;color:#2a3521;letter-spacing:1px;margin:0 0 12px;}
+.album-divider{color:#b8a06a;font-size:11px;margin-bottom:16px;}
+.album-sub{font-family:'EB Garamond',serif;font-size:clamp(14px,3.2vw,16px);color:#4a4434;line-height:1.75;max-width:340px;margin:0 auto 14px;}
+.album-sub strong{color:#2a3521;font-weight:600;}
+.album-note{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(11px,2.6vw,13px);color:#8a8268;line-height:1.6;max-width:320px;margin:0 auto 22px;}
+.album-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:#2a3521;color:#e8dfc8;font-family:'Cinzel',serif;font-size:clamp(11px,2.6vw,13px);letter-spacing:2px;text-transform:uppercase;text-decoration:none;padding:15px 20px;border:1px solid #2a3521;transition:all 0.25s;width:100%;box-sizing:border-box;margin-bottom:10px;cursor:pointer;}
 .album-btn:hover{background:#3a4830;}
+.album-btn-outline{display:flex;align-items:center;justify-content:center;gap:10px;background:transparent;color:#2a3521;font-family:'Cinzel',serif;font-size:clamp(11px,2.6vw,13px);letter-spacing:2px;text-transform:uppercase;padding:14px 20px;border:1px solid #c9bfa8;transition:all 0.25s;width:100%;box-sizing:border-box;cursor:pointer;}
+.album-btn-outline:hover{border-color:#b8a06a;background:#faf7ef;}
 .location-card::after{content:'';position:absolute;inset:10px;border:1px solid rgba(184,160,106,0.55);pointer-events:none;z-index:10;}
 .loc-eyebrow{font-family:'Cinzel',serif;font-size:clamp(9px,1.8vw,11px);letter-spacing:5px;color:#b8a06a;text-align:center;padding:18px 14px 10px;text-transform:uppercase;opacity:0.85;}
 .loc-venue-img{width:100%;height:clamp(140px,38vw,185px);position:relative;overflow:hidden;}
@@ -165,6 +173,7 @@ export default function App() {
   const [rsvpName, setRsvpName]      = useState("");
   const [rsvpNote, setRsvpNote]      = useState("");
   const [guestCount, setGuestCount]  = useState(1);
+  const [albumCopied, setAlbumCopied] = useState(false);
   const [rsvpDone, setRsvpDone]      = useState(false);
   const [rsvpMsg, setRsvpMsg]        = useState({ text: "", sub: "" });
   const [countdown, setCountdown]    = useState({ d:"00",h:"00",m:"00",s:"00" });
@@ -644,36 +653,34 @@ export default function App() {
             <div className="corner tr" style={{ fontSize: 12, top: 14, right: 14 }}>✦</div>
             {!rsvpDone ? (
               <>
-                <div className="rsvp-title">İştirak</div>
-                <div className="rsvp-sub">Zəhmət olmasa cavabınızı bildirin</div>
+                <div className="rsvp-title">İştirak Blankı</div>
+                <div className="rsvp-sub">Zəhmət olmasa əvvəlcədən cavab verin</div>
                 <div className="rsvp-field">
-                  <label className="rsvp-label">Adınız</label>
-                  <input className="rsvp-input" type="text" placeholder="Ad Soyad" value={rsvpName} onChange={e => setRsvpName(e.target.value)} autoComplete="name" />
+                  <label className="rsvp-label">Ad Soyad *</label>
+                  <input className="rsvp-input" type="text" placeholder="Adınızı daxil edin" value={rsvpName} onChange={e => setRsvpName(e.target.value)} autoComplete="name" />
                 </div>
                 <div className="rsvp-field">
-                  <label className="rsvp-label">İştirak edəcəksinizmi?</label>
-                  <div className="rsvp-choices">
+                  <label className="rsvp-label">Nəfər Sayı</label>
+                  <div className="rsvp-stepper">
+                    <button type="button" className="rsvp-step-btn" onClick={() => setGuestCount(c => Math.max(1, c - 1))}>−</button>
+                    <span className="rsvp-step-num">{guestCount}</span>
+                    <button type="button" className="rsvp-step-btn" onClick={() => setGuestCount(c => Math.min(20, c + 1))}>+</button>
+                  </div>
+                </div>
+                <div className="rsvp-field">
+                  <label className="rsvp-label">İştirak</label>
+                  <div className="rsvp-choices rsvp-choices-stack">
                     <button className={`rsvp-choice${rsvpChoice === "yes" ? " sel-yes" : ""}`} onClick={() => setRsvpChoice("yes")}>
-                      🤍 Bəli, gələcəm
+                      ✓ Bəli, iştirak edəcəm
                     </button>
                     <button className={`rsvp-choice${rsvpChoice === "no" ? " sel-no" : ""}`} onClick={() => setRsvpChoice("no")}>
-                      🙏 Gələ bilmirəm
+                      ✗ Təəssüf, edə bilmərəm
                     </button>
                   </div>
                 </div>
-                {rsvpChoice === "yes" && (
-                  <div className="rsvp-field">
-                    <label className="rsvp-label">Neçə nəfər iştirak edəcəksiniz?</label>
-                    <div className="rsvp-stepper">
-                      <button type="button" className="rsvp-step-btn" onClick={() => setGuestCount(c => Math.max(1, c - 1))}>−</button>
-                      <span className="rsvp-step-num">{guestCount}</span>
-                      <button type="button" className="rsvp-step-btn" onClick={() => setGuestCount(c => Math.min(20, c + 1))}>+</button>
-                    </div>
-                  </div>
-                )}
                 <div className="rsvp-field">
-                  <label className="rsvp-label">Cütlüyə mesaj (istəyə bağlı)</label>
-                  <textarea className="rsvp-textarea" placeholder="Cütlüyə xüsusi mesajınızı buraya yazın... 💌" rows={3} value={rsvpNote} onChange={e => setRsvpNote(e.target.value)} />
+                  <label className="rsvp-label">Mesaj (istəyə görə)</label>
+                  <textarea className="rsvp-textarea" placeholder="Gəlin-bəyə xoş arzularınız..." rows={3} value={rsvpNote} onChange={e => setRsvpNote(e.target.value)} />
                 </div>
                 <button className="rsvp-submit" onClick={submitRSVP}>Göndər</button>
               </>
@@ -690,13 +697,23 @@ export default function App() {
           <div className="album-card reveal from-bottom">
             <div className="corner tl" style={{ fontSize: 12, top: 13, left: 13 }}>✦</div>
             <div className="corner tr" style={{ fontSize: 12, top: 13, right: 13 }}>✦</div>
-            <div className="loc-eyebrow">Xatirələrimiz</div>
-            <div className="album-title">Şəkil Albomu</div>
-            <div className="album-sub">Toyumuzun anlarını bizimlə birlikdə izləyin və öz şəkillərinizi əlavə edin</div>
+            <div className="album-icon-circle"><span className="loc-btn-icon">📷</span></div>
+            <div className="album-title">Xatirələrinizi Bizimlə Bölüşün</div>
+            <div className="album-divider">◆</div>
+            <div className="album-sub">Mərasimdə çəkdiyiniz <strong>foto</strong> və <strong>video</strong>larınızı Google Photos albomuna yükləyin — bu xatirələr bizimlə əbədi qalacaq 🌿</div>
+            <div className="album-note">Aşağıdakı düyməyə toxunaraq birbaşa albuma keçin və şəkil əlavə edin.</div>
             <a className="album-btn" href="https://photos.app.goo.gl/fkoWPsurSLmRgiPi6" target="_blank" rel="noopener noreferrer">
-              <span className="loc-btn-icon">📷</span>
-              <span>Albomu Aç</span>
+              <span className="loc-btn-icon">⬆</span>
+              <span>Albuma Şəkil Yüklə</span>
             </a>
+            <button className="album-btn-outline" onClick={() => {
+              navigator.clipboard?.writeText("https://photos.app.goo.gl/fkoWPsurSLmRgiPi6");
+              setAlbumCopied(true);
+              setTimeout(() => setAlbumCopied(false), 2200);
+            }}>
+              <span className="loc-btn-icon">🔗</span>
+              <span>{albumCopied ? "Kopyalandı ✓" : "Linki Kopyala"}</span>
+            </button>
           </div>
 
           {/* LOCATION */}
