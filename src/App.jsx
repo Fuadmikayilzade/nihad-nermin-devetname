@@ -638,7 +638,11 @@ export default function App() {
                     </div>
                   ))}
                 </div>
-                <div className="cd-status">Əziz qonaqlarımız, gecəmizin yalnız böyüklər üçün nəzərdə tutulduğunu nəzərə almağınızı xahiş edirik</div>
+                <div className="cd-status">
+                  Sizi həyatımızın ən özəl günlərindən biri olan toy mərasimimizdə bizimlə birlikdə olmağa dəvət edirik.<br /><br />
+                  Bu əlamətdar günümüzü sizinlə birlikdə qeyd etməkdən böyük məmnuniyyət duyacağıq.<br /><br />
+                  Dəvətlisiniz!
+                </div>
               </div>
 
               <div className="letter-footer reveal from-bottom">
