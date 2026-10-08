@@ -116,6 +116,11 @@ html,body,#root{width:100%;height:100%;background:#000;overflow:hidden;}
 .success-text{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,4.5vw,32px);color:#2a3521;font-weight:300;letter-spacing:2px;margin-bottom:6px;}
 .success-sub{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(16px,3vw,18px);color:#b8a06a;letter-spacing:2px;}
 .location-card{width:100%;max-width:480px;background:#f2ece0;position:relative;box-shadow:0 2px 0 #c9bfa8,0 14px 45px rgba(0,0,0,0.3);overflow:hidden;}
+.album-card{width:100%;max-width:480px;background:#f2ece0;position:relative;box-shadow:0 2px 0 #c9bfa8,0 14px 45px rgba(0,0,0,0.3);overflow:hidden;text-align:center;padding:30px 24px 28px;}
+.album-title{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,5.5vw,29px);font-weight:400;color:#2a3521;letter-spacing:2px;margin:6px 0 10px;}
+.album-sub{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(14px,3.3vw,16px);color:#5c5340;line-height:1.6;max-width:320px;margin:0 auto 20px;}
+.album-btn{display:inline-flex;align-items:center;gap:10px;background:#2a3521;color:#e8dfc8;font-family:'Cinzel',serif;font-size:clamp(11px,2.6vw,13px);letter-spacing:2px;text-transform:uppercase;text-decoration:none;padding:13px 26px;border:1px solid #b8a06a;transition:all 0.25s;}
+.album-btn:hover{background:#3a4830;}
 .location-card::after{content:'';position:absolute;inset:10px;border:1px solid rgba(184,160,106,0.55);pointer-events:none;z-index:10;}
 .loc-eyebrow{font-family:'Cinzel',serif;font-size:clamp(9px,1.8vw,11px);letter-spacing:5px;color:#b8a06a;text-align:center;padding:18px 14px 10px;text-transform:uppercase;opacity:0.85;}
 .loc-venue-img{width:100%;height:clamp(140px,38vw,185px);position:relative;overflow:hidden;}
@@ -679,6 +684,19 @@ export default function App() {
                 <div className="success-sub">{rsvpMsg.sub}</div>
               </div>
             )}
+          </div>
+
+          {/* ALBUM */}
+          <div className="album-card reveal from-bottom">
+            <div className="corner tl" style={{ fontSize: 12, top: 13, left: 13 }}>✦</div>
+            <div className="corner tr" style={{ fontSize: 12, top: 13, right: 13 }}>✦</div>
+            <div className="loc-eyebrow">Xatirələrimiz</div>
+            <div className="album-title">Şəkil Albomu</div>
+            <div className="album-sub">Toyumuzun anlarını bizimlə birlikdə izləyin və öz şəkillərinizi əlavə edin</div>
+            <a className="album-btn" href="https://photos.app.goo.gl/fkoWPsurSLmRgiPi6" target="_blank" rel="noopener noreferrer">
+              <span className="loc-btn-icon">📷</span>
+              <span>Albomu Aç</span>
+            </a>
           </div>
 
           {/* LOCATION */}
